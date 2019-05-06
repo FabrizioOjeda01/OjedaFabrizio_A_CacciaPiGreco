@@ -4,9 +4,16 @@ int btn_Due;
 int btn_Tre;
 int btn_Quattro;
 int btn_Cinque;
+int tempo;
+int vite;
+int punti;
 
 void setup() {
   // put your setup code here, to run once:
+
+  tempo = 2000;
+  vite  = 5;
+  punti = 0;
 
   btn_Inizio  = 7;
   btn_Uno     = 8;
@@ -34,6 +41,38 @@ int DefinisciSimboli() {
   }
 }
 
+int NomeDaSpecificare() {
+
+  int pos = (random (1, 5)) * 3) - 2
+  lcd.setCursor(pos, 1);
+  print("p");
+  int premuto = 0;
+
+  for (int i = 0; i < tempo; i++) {
+  if (btn_Uno == HIGH) {
+      premuto = 1;
+    } break;
+    else if (btn_Due == HIGH) {
+      premuto = 2;
+    } break;
+    else if (btn_Tre == HIGH) {
+      premuto = 3;
+    } break;
+    else if (btn_Quattro == HIGH) {
+      premuto = 4;
+    } break;
+    else if (btn_Cinque == HIGH) {
+      premuto = 5;
+    } break;
+  }
+
+  if (pos == premuto) {
+  punti++;
+  tempo -= 40
+} else {
+  vite--;
+}
+}
 
 void loop() {
   // put your main code here, to run repeatedly:
