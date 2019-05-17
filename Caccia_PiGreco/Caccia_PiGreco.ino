@@ -1,6 +1,40 @@
 #include <LiquidCrystal_I2C.h>
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
+byte Bonus[8] = {
+        B00000,
+        B01010,
+        B11111,
+        B11111,
+        B11111,
+        B01110,
+        B00100,
+        B00000
+};
+
+byte Malus[8] = {
+        B00000,
+        B01110,
+        B11111,
+        B10101,
+        B11111,
+        B01110,
+        B01110,
+        B00000
+};
+
+byte PiGreco[8] = {
+        B00000,
+        B00000,
+        B00000,
+        B11111,
+        B01010,
+        B01010,
+        B01010,
+        B00000
+};
+
+
 //Variabili INPUT
 
 int btn_Inizio  = 3;
@@ -18,7 +52,9 @@ int pos;
 
 void setup() {
   // put your setup code here, to run once:
-
+  lcd.createChar(0, Bonus);
+  lcd.createChar(1, Malus);
+  lcd.createChar(2, PiGreco);
   lcd.init();
   lcd.backlight();
 
@@ -81,7 +117,6 @@ void loop() {
 
   //finché le vite saranno maggiori di 0 il gioco continuerà
   while (vite > 0) {
-
     lcd.clear();
     lcd.setCursor(0, 0);
     lcd.print("Punti:" + String(punti));  //Scrive nella prima riga dell'LCD (a sx) i punti
