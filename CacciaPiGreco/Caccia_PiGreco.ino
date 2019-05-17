@@ -7,7 +7,7 @@ int btn_Inizio  = 3;
 int btn_Uno     = 12;
 int btn_Due     = 11;
 int btn_Tre     = 10;
-int btn_Quattro = 11;
+int btn_Quattro = 9;
 int btn_Cinque  = 8;
 
 int tempo = 2000;
@@ -72,7 +72,6 @@ bool DefinisciPos(String s) {
 void loop() {
   // put your main code here, to run repeatedly:
 
-  int tempo = 2000;
   int vite  = 5;
   int punti = 0;
 
