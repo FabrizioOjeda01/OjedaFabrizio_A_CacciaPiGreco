@@ -3,13 +3,14 @@ LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 //Variabili INPUT
 
-int btn_Inizio  = 2;
-int btn_Uno     = 8;
-int btn_Due     = 9;
+int btn_Inizio  = 3;
+int btn_Uno     = 12;
+int btn_Due     = 11;
 int btn_Tre     = 10;
 int btn_Quattro = 11;
-int btn_Cinque  = 12;
+int btn_Cinque  = 8;
 
+int tempo = 2000;
 int record = 0;
 bool b;
 int premuto;
@@ -18,11 +19,9 @@ int pos;
 void setup() {
   // put your setup code here, to run once:
 
-  record = 0;
-
   lcd.init();
   lcd.backlight();
-  
+
   pinMode(btn_Inizio,  INPUT);
   pinMode(btn_Uno,     INPUT);
   pinMode(btn_Due,     INPUT);
@@ -76,12 +75,12 @@ void loop() {
   int tempo = 2000;
   int vite  = 5;
   int punti = 0;
-  
+
   //finché il bottone di inizio non è premuto non comincerà nulla
   while (digitalRead(btn_Inizio) == LOW) {}
   lcd.clear();
 
-//finché le vite saranno maggiori di 0 il gioco continuerà
+  //finché le vite saranno maggiori di 0 il gioco continuerà
   while (vite > 0) {
 
     lcd.clear();
@@ -103,7 +102,7 @@ void loop() {
         tempo += 50;
       }
     }
-    
+
     else {
       b = DefinisciPos("P");  //Definisce il PiGreco, aumenta i punti di 1, e diminuisce il tempo di scomparsa del PiGreco
       if (b == true) {
