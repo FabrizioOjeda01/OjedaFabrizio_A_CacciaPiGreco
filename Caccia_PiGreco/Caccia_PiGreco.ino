@@ -47,7 +47,6 @@ int btn_Cinque  = 8;
 int tempo = 2000;
 int record = 0;
 bool b;
-int premuto;
 int pos;
 
 void setup() {
@@ -69,7 +68,7 @@ void setup() {
 //metodo per definire le posizioni dei simboli nell'LCD
 bool DefinisciPos(String s) {
   delay(1500);
-  int pos = ((random (1, 5)) * 3) - 2;
+  int pos = ((random (1, 6)) * 3) - 2;
   lcd.setCursor(pos, 1);
   lcd.print(s);
   int premuto = 0;
