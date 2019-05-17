@@ -3,16 +3,14 @@ LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 //Variabili INPUT
 
-int btn_Inizio;
-int btn_Uno;
-int btn_Due;
-int btn_Tre;
-int btn_Quattro;
-int btn_Cinque;
-int tempo;
-int vite;
-int punti;
-int record;
+int btn_Inizio  = 2;
+int btn_Uno     = 8;
+int btn_Due     = 9;
+int btn_Tre     = 10;
+int btn_Quattro = 11;
+int btn_Cinque  = 12;
+
+int record = 0;
 bool b;
 int premuto;
 int pos;
@@ -22,15 +20,9 @@ void setup() {
 
   record = 0;
 
-  btn_Inizio  = 2;
-  btn_Uno     = 8;
-  btn_Due     = 9;
-  btn_Tre     = 10;
-  btn_Quattro = 11;
-  btn_Cinque  = 12;
-
   lcd.init();
   lcd.backlight();
+  
   pinMode(btn_Inizio,  INPUT);
   pinMode(btn_Uno,     INPUT);
   pinMode(btn_Due,     INPUT);
@@ -39,8 +31,8 @@ void setup() {
   pinMode(btn_Cinque,  INPUT);
 }
 
-
-bool NomeDaSpecificare(String s) {
+//metodo per definire le posizioni dei simboli nell'LCD
+bool DefinisciPos(String s) {
   delay(1500);
   int pos = ((random (1, 5)) * 3) - 2;
   lcd.setCursor(pos, 1);
@@ -81,35 +73,39 @@ bool NomeDaSpecificare(String s) {
 void loop() {
   // put your main code here, to run repeatedly:
 
-  tempo = 2000;
-  vite  = 5;
-  punti = 0;
+  int tempo = 2000;
+  int vite  = 5;
+  int punti = 0;
+  
+  //finché il bottone di inizio non è premuto non comincerà nulla
   while (digitalRead(btn_Inizio) == LOW) {}
   lcd.clear();
 
+//finché le vite saranno maggiori di 0 il gioco continuerà
   while (vite > 0) {
-    
+
     lcd.clear();
     lcd.setCursor(0, 0);
-    lcd.print("Punti:" + String(punti));
+    lcd.print("Punti:" + String(punti));  //Scrive nella prima riga dell'LCD (a sx) i punti
     lcd.setCursor(9, 0);
-    lcd.print("Vite:" + String(vite));
+    lcd.print("Vite:" + String(vite));    //Scrive nella prima riga dell'LCD (a dx) le vite
 
     int i = random(1, 11);
     if (i == 1) {
-      b = NomeDaSpecificare("M");
+      b = DefinisciPos("M");  //Definisce il Malus, diminuisce i punti di 1
       if (b == true) {
         punti--;
       }
     } else if (i == 2) {
-      b = NomeDaSpecificare("B");
+      b = DefinisciPos("B");  //Definisce il Bonus, si guadagna una vita ed il tempo di scomparsa del pigreco aumenta
       if (b == true) {
         vite++;
         tempo += 50;
       }
     }
+    
     else {
-      b = NomeDaSpecificare("P");
+      b = DefinisciPos("P");  //Definisce il PiGreco, aumenta i punti di 1, e diminuisce il tempo di scomparsa del PiGreco
       if (b == true) {
         punti++;
         tempo -= 50;
@@ -121,9 +117,7 @@ void loop() {
   }
 
   if (record < punti) {
-
     record = punti;
-
   }
 
   lcd.clear();
