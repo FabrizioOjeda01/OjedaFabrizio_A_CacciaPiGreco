@@ -119,7 +119,7 @@ void loop() {
     if (i == 1) {
       b = DefinisciPos("M");                     //Definisce il Malus, diminuisce i punti di 1
       if (b == true) {
-        punti--;
+        vite--;
       }
     } else if (i == 2) {
       b = DefinisciPos("B");                     //Definisce il Bonus, si guadagna una vita ed il tempo di scomparsa del pigreco aumenta
