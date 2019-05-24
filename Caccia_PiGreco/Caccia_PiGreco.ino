@@ -8,49 +8,13 @@ LiquidCrystal_I2C lcd(0x27, 16, 2);
 #define btn_Quattro  9
 #define btn_Cinque   8
 
-byte Bonus[8] = {           //creazione dei byte per Bonus,Malus, PiGreco
-  B00000,
-  B01010,
-  B11111,
-  B11111,
-  B11111,
-  B01110,
-  B00100,
-  B00000
-};
-
-byte Malus[8] = {
-  B00000,
-  B01110,
-  B11111,
-  B10101,
-  B11111,
-  B01110,
-  B01110,
-  B00000
-};
-
-byte PiGreco[8] = {
-  B00000,
-  B00000,
-  B00000,
-  B11111,
-  B01010,
-  B01010,
-  B01010,
-  B00000
-};
-
 int tempo = 2000;
 int record = 0;
 bool b;
 int pos;
 
 void setup() {
-
-  lcd.createChar(0, Bonus);
-  lcd.createChar(1, Malus);
-  lcd.createChar(2, PiGreco);
+  
   lcd.init();
   lcd.backlight();
 
